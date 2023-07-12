@@ -33,7 +33,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         MemcmpEncodedBytes::Base64(env.vault_pubkey), // encoded bytes
     ));
     let config = RpcProgramAccountsConfig {
-        filters: Some(vec![RpcFilterType::DataSize(80), memcmp]),
+        filters: Some(vec![RpcFilterType::DataSize(81), memcmp]),
         account_config: RpcAccountInfoConfig {
             encoding: Some(UiAccountEncoding::Base64),
             data_slice: Some(UiDataSliceConfig {
