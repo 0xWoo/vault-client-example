@@ -95,7 +95,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             &user_token_account,
             &signer.pubkey(),
             &[&signer.pubkey()],
-            amount,
+            amount.checked_div(100).unwrap(), // 1% of staked amount
             mint_decimals,
         )?);
 
@@ -106,7 +106,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             &[&signer],
             recent_blockhash,
         );
-        rpc_client.send_and_confirm_transaction_with_spinner(&transaction).await?;
+        rpc_client
+            .send_and_confirm_transaction_with_spinner(&transaction)
+            .await?;
     }
 
     Ok(())
